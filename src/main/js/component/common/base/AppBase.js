@@ -13,15 +13,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Switch} from "react-router-dom";
 import AppHeader from "../appheader/AppHeader";
-import {ExpandLess, ExpandMore} from "@material-ui/icons";
-import Collapse from "@material-ui/core/Collapse";
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
-import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import DeleteIcon from '@material-ui/icons/Delete';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PersonCloneIcon from '@material-ui/icons/PersonAddTwoTone';
+import LockIcon from '@material-ui/icons/Lock';
 import {NavLink} from 'react-router-dom';
 import ProtectedRoute from "../ProtectedRoute";
 import Dashboard from "../../dashboard/Dashboard";
+import CreateUser from "../../user/CreateUser";
+import CloneUser from "../../user/CloneUser";
 
 const drawerWidth = 295;
 
@@ -136,7 +138,7 @@ export default function AppBase() {
     return (
         <div className={classes.root}>
             <CssBaseline/>
-            <AppHeader handleDrawerOpen={handleDrawerOpen} open={open}/>
+            <AppHeader handleDrawerOpen={handleDrawerOpen}/>
             <Drawer
                 variant="permanent"
                 className={clsx(classes.drawer, {
@@ -161,13 +163,73 @@ export default function AppBase() {
                         button
                         selected={selectedIndex === 1}
                         classes={{selected: classes.selected}}
-                        className={classes.nested} {...{component: NavLink, to: '/good-receiving-note'}}
+                        className={classes.nested} {...{component: NavLink, to: '/create'}}
                         onClick={(event) => handleOrderSubmenuClick(event, 1)}
-                        key="good-receiving-note">
+                        key="create">
                         <ListItemIcon>
-                            <LocalShippingIcon/>
+                            <PersonAddIcon/>
                         </ListItemIcon>
-                        <ListItemText primary="Good Receiving Note"/>
+                        <ListItemText primary="Create User"/>
+                    </ListItem>
+                    <ListItem
+                        button
+                        selected={selectedIndex === 1}
+                        classes={{selected: classes.selected}}
+                        className={classes.nested} {...{component: NavLink, to: '/clone'}}
+                        onClick={(event) => handleOrderSubmenuClick(event, 1)}
+                        key="clone">
+                        <ListItemIcon>
+                            <PersonCloneIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Clone User"/>
+                    </ListItem>
+                    <ListItem
+                        button
+                        selected={selectedIndex === 1}
+                        classes={{selected: classes.selected}}
+                        className={classes.nested} {...{component: NavLink, to: '/delete'}}
+                        onClick={(event) => handleOrderSubmenuClick(event, 1)}
+                        key="delete">
+                        <ListItemIcon>
+                            <DeleteIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Delete User"/>
+                    </ListItem>
+                    <ListItem
+                        button
+                        selected={selectedIndex === 1}
+                        classes={{selected: classes.selected}}
+                        className={classes.nested} {...{component: NavLink, to: '/change-password'}}
+                        onClick={(event) => handleOrderSubmenuClick(event, 1)}
+                        key="change-password">
+                        <ListItemIcon>
+                            <LockIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Change Password"/>
+                    </ListItem>
+                    <ListItem
+                        button
+                        selected={selectedIndex === 1}
+                        classes={{selected: classes.selected}}
+                        className={classes.nested} {...{component: NavLink, to: '/view'}}
+                        onClick={(event) => handleOrderSubmenuClick(event, 1)}
+                        key="view">
+                        <ListItemIcon>
+                            <PersonIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="View User"/>
+                    </ListItem>
+                    <ListItem
+                        button
+                        selected={selectedIndex === 1}
+                        classes={{selected: classes.selected}}
+                        className={classes.nested} {...{component: NavLink, to: '/modify'}}
+                        onClick={(event) => handleOrderSubmenuClick(event, 1)}
+                        key="modify">
+                        <ListItemIcon>
+                            <SettingsIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Modify User"/>
                     </ListItem>
                 </List>
             </Drawer>
@@ -175,6 +237,8 @@ export default function AppBase() {
                 <div className={classes.toolbar}/>
                 <Switch>
                     <ProtectedRoute exact path='/' component={Dashboard}/>
+                    <ProtectedRoute exact path='/create' component={CreateUser}/>
+                    <ProtectedRoute exact path='/clone' component={CloneUser}/>
                 </Switch>
             </main>
         </div>
